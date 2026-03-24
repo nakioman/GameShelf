@@ -28,6 +28,9 @@ public class Game
     [JsonPropertyName("codes")]
     public CodesReference? Codes { get; set; }
 
+    [JsonPropertyName("requirements")]
+    public GameRequirements? Requirements { get; set; }
+
     [JsonPropertyName("coverFront")]
     public string? CoverFront { get; set; }
 
@@ -93,6 +96,30 @@ public class WheelLayer
 
     [JsonPropertyName("rotatable")]
     public bool Rotatable { get; set; }
+}
+
+public class GameRequirements
+{
+    [JsonPropertyName("cpu")]
+    public string? Cpu { get; set; }
+
+    [JsonPropertyName("ram")]
+    public string? Ram { get; set; }
+
+    [JsonPropertyName("disk")]
+    public string? Disk { get; set; }
+
+    [JsonPropertyName("video")]
+    public string? Video { get; set; }
+
+    [JsonPropertyName("sound")]
+    public string? Sound { get; set; }
+
+    [JsonPropertyName("os")]
+    public string? Os { get; set; }
+
+    [JsonPropertyName("other")]
+    public string? Other { get; set; }
 }
 
 public class WheelOffset

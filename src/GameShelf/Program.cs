@@ -67,6 +67,7 @@ app.MapGet("/api/games/{id}", (string id, LibraryService lib) =>
         game.Disks,
         manual = game.Manual,
         codes = game.Codes,
+        requirements = game.Requirements,
         coverFront = game.CoverFront != null ? $"/api/games/{id}/media/{game.CoverFront}" : null,
         coverBack = game.CoverBack != null ? $"/api/games/{id}/media/{game.CoverBack}" : null,
         coverSpine = game.CoverSpine != null ? $"/api/games/{id}/media/{game.CoverSpine}" : null

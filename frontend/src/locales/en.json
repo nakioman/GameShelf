@@ -47,6 +47,22 @@
     "enterValues": "Enter values and click Look Up",
     "noMatch": "No match found. Check your values."
   },
+  "tabs": {
+    "disks": "Disks",
+    "requirements": "Requirements",
+    "extras": "Extras"
+  },
+  "requirements": {
+    "title": "System Requirements",
+    "none": "No requirements information available.",
+    "cpu": "Processor",
+    "ram": "Memory (RAM)",
+    "disk": "Disk Space",
+    "video": "Video",
+    "sound": "Sound",
+    "os": "Operating System",
+    "other": "Other"
+  },
   "common": {
     "loading": "Loading…"
   }

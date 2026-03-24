@@ -8,6 +8,14 @@
     { "label": "Disk 2", "file": "disks/disk2.img" },
     { "label": "Disk 3", "file": "disks/disk3.img" }
   ],
+  "requirements": {
+    "cpu": "386 DX 33 MHz",
+    "ram": "4 MB",
+    "disk": "~5 MB",
+    "video": "VGA",
+    "sound": "Sound Blaster / Gravis Ultrasound / PC Speaker",
+    "os": "MS-DOS 5.0+"
+  },
   "manual": null,
   "codes": null
 }

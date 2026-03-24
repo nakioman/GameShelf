@@ -47,6 +47,22 @@
     "enterValues": "Ingresá los valores y hacé clic en Buscar",
     "noMatch": "No se encontró coincidencia. Verificá los valores."
   },
+  "tabs": {
+    "disks": "Discos",
+    "requirements": "Requerimientos",
+    "extras": "Extras"
+  },
+  "requirements": {
+    "title": "Requerimientos del Sistema",
+    "none": "No hay información de requerimientos disponible.",
+    "cpu": "Procesador",
+    "ram": "Memoria RAM",
+    "disk": "Espacio en Disco",
+    "video": "Video",
+    "sound": "Sonido",
+    "os": "Sistema Operativo",
+    "other": "Otros"
+  },
   "common": {
     "loading": "Cargando…"
   }

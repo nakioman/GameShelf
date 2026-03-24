@@ -9,6 +9,14 @@
     { "label": "Disk 3 - Data", "file": "disks/disk3.img" },
     { "label": "Disk 4 - Data", "file": "disks/disk4.img" }
   ],
+  "requirements": {
+    "cpu": "8088 / 8086 (10 MHz recomendado)",
+    "ram": "640 KB",
+    "disk": "~2.5 MB",
+    "video": "EGA / VGA / Tandy",
+    "sound": "AdLib / Sound Blaster / Roland MT-32 / PC Speaker",
+    "os": "MS-DOS 3.3+"
+  },
   "manual": null,
   "codes": {
     "type": "lookup",
