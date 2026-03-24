@@ -1,0 +1,29 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+
+# Node
+node_modules/
+dist/
+
+# Build output (frontend builds into wwwroot)
+src/GameShelf/wwwroot/assets/
+src/GameShelf/wwwroot/index.html
+
+# IDE
+.vs/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Library demo disk images (keep game.json, covers, codes)
+library/*/disks/*.img
+library/*/disks/*.ima
+
+# Claude
+.claude/

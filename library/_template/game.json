@@ -1,0 +1,11 @@
+{
+  "title": "Game Title",
+  "year": 1990,
+  "publisher": "Publisher Name",
+  "genre": "Genre",
+  "disks": [
+    { "label": "Disk 1", "file": "disks/disk1.img" }
+  ],
+  "manual": null,
+  "codes": null
+}

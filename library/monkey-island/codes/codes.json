@@ -1,0 +1,11 @@
+{
+  "type": "lookup",
+  "prompt": "Dial-A-Pirate: Face {face}, Year {year}",
+  "fields": ["face", "year"],
+  "entries": {
+    "captain-1585": "Mancomb Seepgood",
+    "captain-1602": "Guybrush Threepwood",
+    "pirate-1585": "LeChuck",
+    "pirate-1602": "Elaine Marley"
+  }
+}

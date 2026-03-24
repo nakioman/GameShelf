@@ -1,0 +1,13 @@
+{
+  "title": "DOOM",
+  "year": 1993,
+  "publisher": "id Software",
+  "genre": "FPS",
+  "disks": [
+    { "label": "Install Disk", "file": "disks/disk1.img" },
+    { "label": "Disk 2", "file": "disks/disk2.img" },
+    { "label": "Disk 3", "file": "disks/disk3.img" }
+  ],
+  "manual": null,
+  "codes": null
+}

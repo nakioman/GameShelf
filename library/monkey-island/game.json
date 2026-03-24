@@ -1,0 +1,17 @@
+{
+  "title": "The Secret of Monkey Island",
+  "year": 1990,
+  "publisher": "LucasArts",
+  "genre": "Adventure",
+  "disks": [
+    { "label": "Disk 1 - Program", "file": "disks/disk1.img" },
+    { "label": "Disk 2 - Data", "file": "disks/disk2.img" },
+    { "label": "Disk 3 - Data", "file": "disks/disk3.img" },
+    { "label": "Disk 4 - Data", "file": "disks/disk4.img" }
+  ],
+  "manual": null,
+  "codes": {
+    "type": "lookup",
+    "config": "codes/codes.json"
+  }
+}
