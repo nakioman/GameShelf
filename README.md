@@ -89,7 +89,7 @@ library/
 
 ### Bulk Import from Floppy Collection
 
-If you have a directory of floppy disk images organized as `{GameName},{Year}/*.img`, you can bulk-import them:
+If you have a directory of floppy disk images organized as `{GameName} (Year)/*.img` or `{GameName},{Year}/*.img`, you can bulk-import them:
 
 ```bash
 node scripts/import-games.mjs --source /path/to/floppies --library ./library
@@ -118,16 +118,16 @@ The script will:
 **Example source directory:**
 ```
 /mnt/floppies/
-├── DOOM,1993/
+├── DOOM (1993)/
 │   ├── disk1.img
 │   ├── disk2.img
 │   └── disk3.img
-├── The Secret of Monkey Island,1990/
+├── The Secret of Monkey Island (1990)/
 │   ├── disk1.img
 │   ├── disk2.img
 │   ├── disk3.img
 │   └── disk4.img
-└── SimCity,1989/
+└── SimCity (1989)/
     └── simcity.img
 ```
 

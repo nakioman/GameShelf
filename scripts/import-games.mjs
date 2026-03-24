@@ -293,9 +293,10 @@ async function main() {
   const entries = fs.readdirSync(SOURCE_DIR, { withFileTypes: true })
     .filter(e => e.isDirectory())
     .map(e => {
-      const match = e.name.match(/^(.+?),\s*(\d{4})$/);
+      // Matches: "Another World (1991)" or "DOOM,1993" or "SimCity, 1989"
+      const match = e.name.match(/^(.+?)\s*[\(\[,]\s*(\d{4})\s*[\)\]]?\s*$/);
       if (!match) {
-        console.log(`⚠ Skipping "${e.name}" — doesn't match {name},{year} format`);
+        console.log(`⚠ Skipping "${e.name}" — doesn't match {name} (year) or {name},{year} format`);
         return null;
       }
       const gameName = match[1].trim();
