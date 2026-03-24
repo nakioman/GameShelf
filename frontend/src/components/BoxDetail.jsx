@@ -12,10 +12,10 @@ export default function BoxDetail() {
   if (!game) return null;
 
   return (
-    <Modal onClose={closeGame} className="w-[90%] max-w-[950px] max-h-[90vh]">
-      <div className="grid grid-cols-[1fr_1fr] bg-shelf-panel rounded-xl overflow-hidden shadow-2xl">
+    <Modal onClose={closeGame} className="w-[90%] max-w-[1400px] h-[75vh]">
+      <div className="grid grid-cols-[1fr_1fr] bg-shelf-panel rounded-xl overflow-hidden shadow-2xl h-full">
         {/* Left: 3D Box */}
-        <div className="bg-shelf-bg relative h-[500px]">
+        <div className="bg-shelf-bg relative h-full">
           <Box3D game={game} />
           <button
             onClick={closeGame}
@@ -29,7 +29,7 @@ export default function BoxDetail() {
         </div>
 
         {/* Right: Info panel */}
-        <div className="p-6 overflow-y-auto max-h-[500px] space-y-5">
+        <div className="p-6 overflow-y-auto h-full space-y-5">
           <div>
             <h2 className="text-2xl font-bold">{game.title}</h2>
             <div className="flex gap-4 mt-1 text-sm text-shelf-text-dim">

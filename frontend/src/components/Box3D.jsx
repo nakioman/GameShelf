@@ -12,31 +12,72 @@ function loadImg(src) {
 }
 
 function CSSBox3D({ game }) {
-  const [rotX, setRotX] = useState(-15);
-  const [rotY, setRotY] = useState(-25);
+  const [rotX, setRotX] = useState(0);
+  const [rotY, setRotY] = useState(0);
   const [panX, setPanX] = useState(0);
   const [panY, setPanY] = useState(0);
-  const [zoom, setZoom] = useState(0.5);
+  const [zoom, setZoom] = useState(null);
   const [boxSize, setBoxSize] = useState(null);
+  const containerRef = useRef();
   const dragging = useRef(false);
   const panning = useRef(false);
   const lastPos = useRef({ x: 0, y: 0 });
 
-  // Measure all images to derive correct proportions
+  const [imageDims, setImageDims] = useState(null);
+  const [containerSize, setContainerSize] = useState(null);
+
+  // Track container size
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    const update = () => {
+      if (container.clientHeight > 0) {
+        setContainerSize({ w: container.clientWidth, h: container.clientHeight });
+      }
+    };
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
+
+  // Load images
   useEffect(() => {
     Promise.all([
       loadImg(game.coverFront),
       loadImg(game.coverBack),
       loadImg(game.coverSpine),
     ]).then(([front, back, spine]) => {
-      const frontAspect = front ? front.aspect : 0.7;
-      const spineAspect = spine ? spine.aspect : 0.15;
-      const H = 600;
-      const W = Math.round(H * frontAspect);
-      const D = Math.round(H * spineAspect);
-      setBoxSize({ W, H, D });
+      setImageDims({ front, back, spine });
     });
   }, [game.coverFront, game.coverBack, game.coverSpine]);
+
+  // Calculate box size when both images and container are ready
+  useEffect(() => {
+    if (!imageDims || !containerSize) return;
+
+    const { front, back, spine } = imageDims;
+    const frontAspect = front ? front.aspect : 0.7;
+    const spineAspect = spine ? spine.aspect : 0.15;
+
+    const nativeH = Math.max(
+      front ? front.h : 0,
+      back ? back.h : 0,
+      spine ? spine.h : 0,
+      800
+    );
+    const H = Math.min(nativeH, 2000);
+    const W = Math.round(H * frontAspect);
+    const D = Math.round(H * spineAspect);
+
+    const cw = containerSize.w - 60;
+    const ch = containerSize.h - 80;
+    // Account for spine depth adding to visible width when rotated
+    const initialScale = Math.min(ch / H, cw / (W + D));
+
+    setBoxSize({ W, H, D, initialScale });
+    setZoom(null);
+  }, [imageDims, containerSize]);
 
   const onPointerDown = (e) => {
     lastPos.current = { x: e.clientX, y: e.clientY };
@@ -67,24 +108,22 @@ function CSSBox3D({ game }) {
   const onContextMenu = (e) => e.preventDefault(); // prevent right-click menu
   const onWheel = (e) => {
     e.preventDefault();
-    setZoom(z => Math.max(0.35, Math.min(1.0, z - e.deltaY * 0.001)));
+    if (!boxSize) return;
+    const minScale = boxSize.initialScale * 0.4;
+    const maxScale = 1.0; // 1.0 = native image resolution
+    setZoom(z => Math.max(minScale, Math.min(maxScale, (z ?? boxSize.initialScale) - e.deltaY * 0.0005)));
   };
   // Double-click to reset view
   const onDoubleClick = () => {
-    setRotX(-15); setRotY(-25);
+    setRotX(0); setRotY(0);
     setPanX(0); setPanY(0);
-    setZoom(0.5);
+    setZoom(boxSize ? boxSize.initialScale : 0.5);
   };
 
-  if (!boxSize) {
-    return (
-      <div className="w-full h-full flex items-center justify-center text-shelf-text-dim">
-        Loading…
-      </div>
-    );
-  }
-
-  const { W, H, D } = boxSize;
+  const ready = !!boxSize;
+  const W = boxSize?.W || 0;
+  const H = boxSize?.H || 0;
+  const D = boxSize?.D || 0;
   const hw = W / 2;
   const hh = H / 2;
   const hd = D / 2;
@@ -105,29 +144,41 @@ function CSSBox3D({ game }) {
     backfaceVisibility: 'hidden',
   };
 
+  const currentZoom = zoom ?? (boxSize?.initialScale || 0.2);
+
   return (
     <div
-      className="w-full h-full flex items-center justify-center select-none overflow-hidden"
+      ref={containerRef}
+      className="w-full h-full select-none overflow-hidden"
       style={{
+        position: 'relative',
         cursor: panning.current ? 'grabbing' : 'grab',
         perspective: '1200px',
         perspectiveOrigin: 'center center',
       }}
-      onPointerDown={onPointerDown}
-      onPointerMove={onPointerMove}
-      onPointerUp={onPointerUp}
-      onPointerLeave={onPointerUp}
-      onContextMenu={onContextMenu}
-      onWheel={onWheel}
-      onDoubleClick={onDoubleClick}
+      onPointerDown={ready ? onPointerDown : undefined}
+      onPointerMove={ready ? onPointerMove : undefined}
+      onPointerUp={ready ? onPointerUp : undefined}
+      onPointerLeave={ready ? onPointerUp : undefined}
+      onContextMenu={ready ? onContextMenu : undefined}
+      onWheel={ready ? onWheel : undefined}
+      onDoubleClick={ready ? onDoubleClick : undefined}
     >
+      {!ready && (
+        <div className="absolute inset-0 flex items-center justify-center text-shelf-text-dim z-10">
+          Loading…
+        </div>
+      )}
       <div style={{
         width: W, height: H,
-        position: 'relative',
+        position: 'absolute',
+        left: '50%', top: '50%',
+        marginLeft: -hw, marginTop: -H / 2,
         transformStyle: 'preserve-3d',
-        transform: `translate(${panX}px, ${panY}px) scale(${zoom}) rotateX(${rotX}deg) rotateY(${rotY}deg)`,
+        transform: `translate(${panX}px, ${panY}px) scale(${currentZoom}) rotateX(${rotX}deg) rotateY(${rotY}deg)`,
         transition: (dragging.current || panning.current) ? 'none' : 'transform 0.3s ease-out',
         willChange: 'transform',
+        visibility: ready ? 'visible' : 'hidden',
       }}>
 
         {/* Front face (+Z) */}
