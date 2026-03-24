@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function LookupTable({ config }) {
+  const { t } = useTranslation();
   const [values, setValues] = useState({});
   const [result, setResult] = useState(null);
 
@@ -13,7 +15,7 @@ export default function LookupTable({ config }) {
   return (
     <div className="space-y-5">
       <p className="text-center text-shelf-text italic">
-        {config.prompt || 'Enter the values below:'}
+        {config.prompt || t('lookup.defaultPrompt')}
       </p>
 
       <div className="flex gap-3 flex-wrap justify-center">
@@ -36,7 +38,7 @@ export default function LookupTable({ config }) {
         onClick={handleLookup}
         className="block mx-auto px-6 py-2 bg-shelf-accent text-white rounded-lg font-semibold hover:brightness-110 transition"
       >
-        Look Up
+        {t('lookup.lookUp')}
       </button>
 
       <div className={`text-center p-4 bg-shelf-bg rounded-lg min-h-[56px] flex items-center justify-center ${
@@ -44,8 +46,8 @@ export default function LookupTable({ config }) {
         result === false ? 'text-shelf-text-dim text-sm' :
         'text-shelf-success text-xl font-bold'
       }`}>
-        {result === null && 'Enter values and click Look Up'}
-        {result === false && 'No match found. Check your values.'}
+        {result === null && t('lookup.enterValues')}
+        {result === false && t('lookup.noMatch')}
         {result && result}
       </div>
     </div>

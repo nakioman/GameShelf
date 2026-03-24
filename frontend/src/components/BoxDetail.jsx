@@ -1,9 +1,11 @@
+import { useTranslation } from 'react-i18next';
 import useStore from '../store';
 import Modal from './Modal';
 import Box3D from './Box3D';
 import DiskList from './DiskList';
 
 export default function BoxDetail() {
+  const { t } = useTranslation();
   const game = useStore(s => s.selectedGame);
   const closeGame = useStore(s => s.closeGame);
   const openManual = useStore(s => s.openManual);
@@ -24,7 +26,7 @@ export default function BoxDetail() {
             &#10005;
           </button>
           <div className="absolute bottom-3 left-0 right-0 text-center text-xs text-shelf-text-dim/60">
-            Drag to rotate · Right-drag to pan · Scroll to zoom · Double-click to reset
+            {t('boxDetail.controls')}
           </div>
         </div>
 
@@ -44,7 +46,7 @@ export default function BoxDetail() {
           {(game.manual || game.codes) && (
             <div>
               <h3 className="text-xs uppercase tracking-widest text-shelf-accent font-semibold mb-2">
-                Extras
+                {t('boxDetail.extras')}
               </h3>
               <div className="flex gap-3 flex-wrap">
                 {game.manual && (
@@ -52,7 +54,7 @@ export default function BoxDetail() {
                     onClick={openManual}
                     className="flex items-center gap-2 px-4 py-2 bg-shelf-card text-shelf-text rounded-lg text-sm font-medium hover:bg-shelf-accent hover:text-white transition-all"
                   >
-                    &#128214; Read Manual
+                    &#128214; {t('boxDetail.readManual')}
                   </button>
                 )}
                 {game.codes && (
@@ -60,7 +62,7 @@ export default function BoxDetail() {
                     onClick={openCodes}
                     className="flex items-center gap-2 px-4 py-2 bg-shelf-card text-shelf-text rounded-lg text-sm font-medium hover:bg-shelf-accent hover:text-white transition-all"
                   >
-                    &#128272; {game.codes.type === 'wheel' ? 'Code Wheel' : 'Lookup Codes'}
+                    &#128272; {game.codes.type === 'wheel' ? t('boxDetail.codeWheel') : t('boxDetail.lookupCodes')}
                   </button>
                 )}
               </div>

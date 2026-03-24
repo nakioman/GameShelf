@@ -1,0 +1,53 @@
+{
+  "header": {
+    "title": "GameShelf",
+    "search": "Search games...",
+    "sortTitle": "Title",
+    "sortYear": "Year",
+    "sortPublisher": "Publisher"
+  },
+  "driveBar": {
+    "eject": "Eject",
+    "empty": "Empty"
+  },
+  "shelf": {
+    "noGames": "No games found",
+    "noGamesHint": "Add game folders to your library directory with a game.json file.",
+    "clickToSelect": "Click to select",
+    "disksCount": "{{count}} disks",
+    "manual": "Manual",
+    "codes": "Codes",
+    "loading": "Loading shelf…"
+  },
+  "boxDetail": {
+    "controls": "Drag to rotate · Right-drag to pan · Scroll to zoom · Double-click to reset",
+    "extras": "Extras",
+    "readManual": "Read Manual",
+    "codeWheel": "Code Wheel",
+    "lookupCodes": "Lookup Codes",
+    "floppyDisks": "Floppy Disks ({{count}})"
+  },
+  "manual": {
+    "title": "Manual",
+    "prev": "Prev",
+    "next": "Next",
+    "page": "{{page}} / {{total}}",
+    "loading": "Loading manual..."
+  },
+  "codeViewer": {
+    "title": "Copy Protection",
+    "noConfig": "No codes configuration found."
+  },
+  "codeWheel": {
+    "hint": "Drag the inner wheel to rotate"
+  },
+  "lookup": {
+    "defaultPrompt": "Enter the values below:",
+    "lookUp": "Look Up",
+    "enterValues": "Enter values and click Look Up",
+    "noMatch": "No match found. Check your values."
+  },
+  "common": {
+    "loading": "Loading…"
+  }
+}

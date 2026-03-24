@@ -57,7 +57,7 @@ export default function Shelf3D() {
   if (status === 'checking') {
     return (
       <div className="flex items-center justify-center h-[60vh] text-shelf-text-dim">
-        Loading shelf…
+        Cargando estante…
       </div>
     );
   }
@@ -70,7 +70,7 @@ export default function Shelf3D() {
     <WebGLErrorBoundary>
       <Suspense fallback={
         <div className="flex items-center justify-center h-[60vh] text-shelf-text-dim">
-          Loading shelf…
+          Cargando estante…
         </div>
       }>
         <Shelf3DCanvas />

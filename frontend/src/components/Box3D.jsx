@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 // Load an image and return its natural dimensions
 function loadImg(src) {
@@ -12,6 +13,7 @@ function loadImg(src) {
 }
 
 function CSSBox3D({ game }) {
+  const { t } = useTranslation();
   const [rotX, setRotX] = useState(0);
   const [rotY, setRotY] = useState(0);
   const [panX, setPanX] = useState(0);
@@ -166,7 +168,7 @@ function CSSBox3D({ game }) {
     >
       {!ready && (
         <div className="absolute inset-0 flex items-center justify-center text-shelf-text-dim z-10">
-          Loading…
+          {t('common.loading')}
         </div>
       )}
       <div style={{

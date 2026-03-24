@@ -1,0 +1,53 @@
+{
+  "header": {
+    "title": "GameShelf",
+    "search": "Buscar juegos...",
+    "sortTitle": "Título",
+    "sortYear": "Año",
+    "sortPublisher": "Editor"
+  },
+  "driveBar": {
+    "eject": "Expulsar",
+    "empty": "Vacío"
+  },
+  "shelf": {
+    "noGames": "No se encontraron juegos",
+    "noGamesHint": "Agregá carpetas de juegos a tu directorio de biblioteca con un archivo game.json.",
+    "clickToSelect": "Clic para seleccionar",
+    "disksCount": "{{count}} discos",
+    "manual": "Manual",
+    "codes": "Códigos",
+    "loading": "Cargando estante…"
+  },
+  "boxDetail": {
+    "controls": "Arrastrá para rotar · Clic derecho para mover · Scroll para zoom · Doble clic para resetear",
+    "extras": "Extras",
+    "readManual": "Leer Manual",
+    "codeWheel": "Rueda de Códigos",
+    "lookupCodes": "Buscar Códigos",
+    "floppyDisks": "Disquetes ({{count}})"
+  },
+  "manual": {
+    "title": "Manual",
+    "prev": "Anterior",
+    "next": "Siguiente",
+    "page": "{{page}} / {{total}}",
+    "loading": "Cargando manual..."
+  },
+  "codeViewer": {
+    "title": "Protección Anticopia",
+    "noConfig": "No se encontró configuración de códigos."
+  },
+  "codeWheel": {
+    "hint": "Arrastrá la rueda interior para girar"
+  },
+  "lookup": {
+    "defaultPrompt": "Ingresá los valores a continuación:",
+    "lookUp": "Buscar",
+    "enterValues": "Ingresá los valores y hacé clic en Buscar",
+    "noMatch": "No se encontró coincidencia. Verificá los valores."
+  },
+  "common": {
+    "loading": "Cargando…"
+  }
+}

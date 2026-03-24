@@ -1,9 +1,11 @@
+import { useTranslation } from 'react-i18next';
 import useStore from '../store';
 
 export default function DriveBar() {
   const driveStatus = useStore(s => s.driveStatus);
   const ejectDisk = useStore(s => s.ejectDisk);
 
+  const { t } = useTranslation();
   const drives = [0, 1];
 
   return (
@@ -24,11 +26,11 @@ export default function DriveBar() {
                   onClick={() => ejectDisk(drive)}
                   className="px-2 py-0.5 bg-shelf-accent text-white rounded text-xs hover:brightness-110 transition"
                 >
-                  Eject
+                  {t('driveBar.eject')}
                 </button>
               </>
             ) : (
-              <span className="text-shelf-text-dim/50 italic flex-1">Empty</span>
+              <span className="text-shelf-text-dim/50 italic flex-1">{t('driveBar.empty')}</span>
             )}
           </div>
         );

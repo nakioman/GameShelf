@@ -1,6 +1,8 @@
 import { useRef, useState, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function CodeWheel({ config, gameId }) {
+  const { t } = useTranslation();
   const containerRef = useRef(null);
   const [angle, setAngle] = useState(0);
   const [dragging, setDragging] = useState(false);
@@ -60,7 +62,7 @@ export default function CodeWheel({ config, gameId }) {
         ))}
       </div>
       <p className="text-center text-xs text-shelf-text-dim italic mt-3">
-        Drag the inner wheel to rotate
+        {t('codeWheel.hint')}
       </p>
     </div>
   );

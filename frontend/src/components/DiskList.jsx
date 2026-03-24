@@ -1,14 +1,16 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import useStore from '../store';
 
 export default function DiskList({ game }) {
+  const { t } = useTranslation();
   const driveStatus = useStore(s => s.driveStatus);
   const mountDisk = useStore(s => s.mountDisk);
 
   return (
     <div className="space-y-2">
       <h3 className="text-xs uppercase tracking-widest text-shelf-accent font-semibold">
-        Floppy Disks ({game.disks.length})
+        {t('boxDetail.floppyDisks', { count: game.disks.length })}
       </h3>
       {game.disks.map((disk, i) => (
         <DiskItem key={i} game={game} disk={disk} driveStatus={driveStatus} mountDisk={mountDisk} />

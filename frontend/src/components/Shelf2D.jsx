@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useFilteredGames } from '../store';
 import useStore from '../store';
 
@@ -28,6 +29,7 @@ function useImageSize(src) {
 const SHELF_H = 308; // shelf row height
 
 function GameSpine({ game }) {
+  const { t } = useTranslation();
   const [hovered, setHovered] = useState(false);
   const selectGame = useStore(s => s.selectGame);
   const color = useMemo(() => titleToColor(game.title), [game.title]);
@@ -155,15 +157,15 @@ function GameSpine({ game }) {
               {[game.year, game.publisher].filter(Boolean).join(' · ')}
             </div>
             <div className="flex gap-1 mt-1">
-              {game.diskCount > 1 && <span className="text-[9px] px-1 rounded bg-white/20 text-white">{game.diskCount} disks</span>}
-              {game.hasManual && <span className="text-[9px] px-1 rounded bg-white/20 text-white">Manual</span>}
-              {game.hasCodes && <span className="text-[9px] px-1 rounded bg-white/20 text-white">Codes</span>}
+              {game.diskCount > 1 && <span className="text-[9px] px-1 rounded bg-white/20 text-white">{t('shelf.disksCount', { count: game.diskCount })}</span>}
+              {game.hasManual && <span className="text-[9px] px-1 rounded bg-white/20 text-white">{t('shelf.manual')}</span>}
+              {game.hasCodes && <span className="text-[9px] px-1 rounded bg-white/20 text-white">{t('shelf.codes')}</span>}
             </div>
           </div>
 
           {/* Click hint */}
           <div className="absolute top-2 right-2 text-[9px] text-white/50 bg-black/40 px-1.5 py-0.5 rounded">
-            Click to select
+            {t('shelf.clickToSelect')}
           </div>
         </div>
       </div>
@@ -199,6 +201,7 @@ function ShelfRow({ games, rowIndex }) {
 }
 
 export default function Shelf2D() {
+  const { t } = useTranslation();
   const games = useFilteredGames();
   const selectGame = useStore(s => s.selectGame);
 
@@ -206,8 +209,8 @@ export default function Shelf2D() {
     return (
       <div className="flex items-center justify-center h-[60vh] text-center text-shelf-text-dim">
         <div>
-          <h2 className="text-xl font-semibold text-shelf-text mb-2">No games found</h2>
-          <p className="max-w-md">Add game folders to your library directory with a game.json file.</p>
+          <h2 className="text-xl font-semibold text-shelf-text mb-2">{t('shelf.noGames')}</h2>
+          <p className="max-w-md">{t('shelf.noGamesHint')}</p>
         </div>
       </div>
     );
