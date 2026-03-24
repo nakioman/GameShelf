@@ -87,6 +87,50 @@ library/
     └── game.json
 ```
 
+### Bulk Import from Floppy Collection
+
+If you have a directory of floppy disk images organized as `{GameName},{Year}/*.img`, you can bulk-import them:
+
+```bash
+node scripts/import-games.mjs --source /path/to/floppies --library ./library
+```
+
+The script will:
+- Scan all `{Name},{Year}/` subdirectories for disk images (`.img`, `.ima`, `.dsk`, `.vfd`, `.imd`)
+- Search [MobyGames](https://www.mobygames.com/) for metadata and cover art (prefers Spanish/European covers)
+- Try [BigBoxCollection.com](https://bigboxcollection.com/) for hi-res box scans (front, back, spine)
+- Guess system requirements based on the game's year
+- Prompt interactively for anything it can't find automatically
+- Generate `game.json` with all fields filled in
+
+**Options:**
+
+| Flag | Description |
+|------|-------------|
+| `--source /path` | Source directory with `{game},{year}/` folders (required) |
+| `--library /path` | Target GameShelf library directory (required) |
+| `--api-key KEY` | MobyGames API key for cover art and metadata search |
+| `--link` | Create symlinks to disk images instead of copying them |
+| `--skip-existing` | Skip games that already have a `game.json` |
+
+**MobyGames API key:** Get a free key at https://www.mobygames.com/info/api/ — it's optional but enables cover art downloads and metadata lookup. You can also set it via the `MOBY_API_KEY` environment variable.
+
+**Example source directory:**
+```
+/mnt/floppies/
+├── DOOM,1993/
+│   ├── disk1.img
+│   ├── disk2.img
+│   └── disk3.img
+├── The Secret of Monkey Island,1990/
+│   ├── disk1.img
+│   ├── disk2.img
+│   ├── disk3.img
+│   └── disk4.img
+└── SimCity,1989/
+    └── simcity.img
+```
+
 ### game.json format
 
 ```json
@@ -99,9 +143,20 @@ library/
     { "label": "Install Disk", "file": "disks/disk1.img" },
     { "label": "Disk 2", "file": "disks/disk2.img" },
     { "label": "Disk 3", "file": "disks/disk3.img" }
-  ]
+  ],
+  "requirements": {
+    "cpu": "386 DX 33 MHz",
+    "cpuMin": "386",
+    "ram": "4 MB",
+    "disk": "~5 MB",
+    "video": "VGA",
+    "sound": "Sound Blaster / Gravis Ultrasound / PC Speaker",
+    "os": "MS-DOS 5.0+"
+  }
 }
 ```
+
+The `cpuMin` field is used for CPU-based filtering. Valid values (ordered weakest to strongest): `8088`, `8086`, `286`, `386`, `486`, `pentium`, `pentium2`, `pentium3`, `pentium4`.
 
 Cover images are auto-detected by filename: `cover-front.*`, `cover-back.*`, `cover-spine.*` (supports png, jpg, webp, gif, bmp).
 
