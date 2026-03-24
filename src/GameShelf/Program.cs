@@ -45,6 +45,7 @@ app.MapGet("/api/games", (LibraryService lib) =>
         diskCount = g.Disks.Count,
         hasManual = g.Manual != null,
         hasCodes = g.Codes != null,
+        cpuMin = g.Requirements?.CpuMin,
         coverFront = g.CoverFront != null ? $"/api/games/{g.Id}/media/{g.CoverFront}" : null,
         coverBack = g.CoverBack != null ? $"/api/games/{g.Id}/media/{g.CoverBack}" : null,
         coverSpine = g.CoverSpine != null ? $"/api/games/{g.Id}/media/{g.CoverSpine}" : null

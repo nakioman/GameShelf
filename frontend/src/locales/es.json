@@ -4,7 +4,15 @@
     "search": "Buscar juegos...",
     "sortTitle": "Título",
     "sortYear": "Año",
-    "sortPublisher": "Editor"
+    "sortPublisher": "Editor",
+    "filters": "Filtros",
+    "filterYear": "Año",
+    "filterYearPlaceholder": "1993",
+    "filterPublisher": "Editor",
+    "filterPublisherPlaceholder": "id Software",
+    "filterCpu": "CPU máx.",
+    "filterCpuAll": "Todas",
+    "clearFilters": "Limpiar filtros"
   },
   "driveBar": {
     "eject": "Expulsar",

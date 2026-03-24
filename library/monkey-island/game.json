@@ -11,6 +11,7 @@
   ],
   "requirements": {
     "cpu": "8088 / 8086 (10 MHz recomendado)",
+    "cpuMin": "8088",
     "ram": "640 KB",
     "disk": "~2.5 MB",
     "video": "EGA / VGA / Tandy",

@@ -6,6 +6,15 @@
   "disks": [
     { "label": "Disk 1", "file": "disks/disk1.img" }
   ],
+  "requirements": {
+    "cpu": "386 DX 33 MHz",
+    "cpuMin": "386",
+    "ram": "4 MB",
+    "disk": "5 MB",
+    "video": "VGA",
+    "sound": "Sound Blaster",
+    "os": "MS-DOS 5.0+"
+  },
   "manual": null,
   "codes": null
 }

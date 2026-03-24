@@ -101,7 +101,10 @@ public class WheelLayer
 public class GameRequirements
 {
     [JsonPropertyName("cpu")]
-    public string? Cpu { get; set; }
+    public string? Cpu { get; set; }  // Human-readable description
+
+    [JsonPropertyName("cpuMin")]
+    public string? CpuMin { get; set; }  // Enum: 8088, 8086, 286, 386, 486, pentium, pentium2, pentium3, pentium4
 
     [JsonPropertyName("ram")]
     public string? Ram { get; set; }

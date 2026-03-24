@@ -4,7 +4,15 @@
     "search": "Search games...",
     "sortTitle": "Title",
     "sortYear": "Year",
-    "sortPublisher": "Publisher"
+    "sortPublisher": "Publisher",
+    "filters": "Filters",
+    "filterYear": "Year",
+    "filterYearPlaceholder": "1993",
+    "filterPublisher": "Publisher",
+    "filterPublisherPlaceholder": "id Software",
+    "filterCpu": "Max CPU",
+    "filterCpuAll": "All",
+    "clearFilters": "Clear filters"
   },
   "driveBar": {
     "eject": "Eject",

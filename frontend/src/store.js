@@ -6,7 +6,7 @@ const useStore = create((set, get) => ({
   games: [],
   selectedGame: null,     // full game detail object
   driveStatus: {},        // { 0: { gameId, diskFile, label, gameTitle }, 1: ... }
-  filter: { search: '', sort: 'title' },
+  filter: { search: '', sort: 'title', filterYear: null, filterPublisher: null, filterCpu: null },
 
   // Modals
   showManual: false,
@@ -70,20 +70,56 @@ const useStore = create((set, get) => ({
 
 export default useStore;
 
+// CPU hierarchy — lower index = older/weaker CPU
+export const CPU_TIERS = [
+  '8088', '8086', '286', '386', '486', 'pentium', 'pentium2', 'pentium3', 'pentium4'
+];
+
+export function cpuTierIndex(cpuMin) {
+  if (!cpuMin) return -1;
+  return CPU_TIERS.indexOf(cpuMin.toLowerCase());
+}
+
 // Derived selector — safe for React 19 (returns stable ref via useMemo)
 export function useFilteredGames() {
   const games = useStore(s => s.games);
   const filter = useStore(s => s.filter);
   return useMemo(() => {
     let list = [...games];
+
+    // Text search — matches title, publisher, genre, year
     const q = filter.search.toLowerCase();
     if (q) {
       list = list.filter(g =>
         g.title.toLowerCase().includes(q) ||
         (g.publisher || '').toLowerCase().includes(q) ||
-        (g.genre || '').toLowerCase().includes(q)
+        (g.genre || '').toLowerCase().includes(q) ||
+        String(g.year || '').includes(q)
       );
     }
+
+    // Year filter
+    if (filter.filterYear) {
+      list = list.filter(g => g.year === filter.filterYear);
+    }
+
+    // Publisher filter
+    if (filter.filterPublisher) {
+      const pub = filter.filterPublisher.toLowerCase();
+      list = list.filter(g => (g.publisher || '').toLowerCase().includes(pub));
+    }
+
+    // CPU filter — show games that run on the selected CPU (cpuMin <= selected tier)
+    if (filter.filterCpu) {
+      const maxTier = cpuTierIndex(filter.filterCpu);
+      if (maxTier >= 0) {
+        list = list.filter(g => {
+          const gameTier = cpuTierIndex(g.cpuMin);
+          return gameTier >= 0 && gameTier <= maxTier;
+        });
+      }
+    }
+
     list.sort((a, b) => {
       if (filter.sort === 'year') return (a.year || 0) - (b.year || 0);
       if (filter.sort === 'publisher') return (a.publisher || '').localeCompare(b.publisher || '');
