@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import useStore from '../store';
 import Modal from './Modal';
-import Box3D from './Box3D';
+import BoxViewer from './BoxViewer';
 import DiskList from './DiskList';
 import Requirements from './Requirements';
 
@@ -25,18 +25,15 @@ export default function BoxDetail() {
   return (
     <Modal onClose={closeGame} className="w-[90%] max-w-[1400px] h-[75vh]">
       <div className="grid grid-cols-[1fr_1fr] bg-shelf-panel rounded-xl overflow-hidden shadow-2xl h-full">
-        {/* Left: 3D Box */}
-        <div className="bg-shelf-bg relative h-full">
-          <Box3D game={game} />
+        {/* Left: Cover viewer */}
+        <div className="bg-shelf-bg relative h-full flex flex-col">
           <button
             onClick={closeGame}
             className="absolute top-3 left-3 w-8 h-8 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-shelf-accent transition-colors z-10"
           >
             &#10005;
           </button>
-          <div className="absolute bottom-3 left-0 right-0 text-center text-xs text-shelf-text-dim/60">
-            {t('boxDetail.controls')}
-          </div>
+          <BoxViewer game={game} />
         </div>
 
         {/* Right: Info panel */}

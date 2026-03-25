@@ -71,6 +71,12 @@
     "os": "Sistema Operativo",
     "other": "Otros"
   },
+  "boxViewer": {
+    "front": "Frente",
+    "back": "Dorso",
+    "noImage": "No hay imagen de portada disponible",
+    "reset": "Resetear"
+  },
   "common": {
     "loading": "Cargando…"
   }

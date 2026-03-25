@@ -71,6 +71,12 @@
     "os": "Operating System",
     "other": "Other"
   },
+  "boxViewer": {
+    "front": "Front",
+    "back": "Back",
+    "noImage": "No cover image available",
+    "reset": "Reset"
+  },
   "common": {
     "loading": "Loading…"
   }
