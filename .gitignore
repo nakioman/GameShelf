@@ -21,9 +21,8 @@ src/GameShelf/wwwroot/index.html
 .DS_Store
 Thumbs.db
 
-# Library demo disk images (keep game.json, covers, codes)
-library/*/disks/*.img
-library/*/disks/*.ima
+# Library (game data, covers, disk images — user content)
+library/
 
 # Claude
 .claude/
